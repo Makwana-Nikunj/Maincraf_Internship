@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Product from './Product.jsx';
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -52,20 +53,7 @@ function App() {
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold text-center mb-8">Task1 Frontend</h1>
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
-          {products.map((p) => (
-            <div key={p._id} className="bg-gray-800 p-4 rounded">
-              {p.ImageUrl && (
-                <img src={p.ImageUrl} alt={p.name} className="w-full h-40 object-cover rounded mb-3" />
-              )}
-              <div>
-                <h3 className="text-lg font-semibold">{p.name}</h3>
-                <p className="text-blue-400 font-semibold">${p.price}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-        <form onSubmit={handleSubmit} className="bg-gray-800 p-6 rounded flex flex-wrap gap-3 justify-center items-center">
+        <form onSubmit={handleSubmit} className="bg-gray-800 p-6 rounded flex flex-wrap gap-3 justify-center items-center mb-5">
           <input
             type="text"
             placeholder="Product name"
@@ -88,6 +76,12 @@ function App() {
           />
           <button type="submit" className="px-6 py-2 rounded bg-blue-500 text-white">Add Product</button>
         </form>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+          {products.map((p) => (
+            <Product key={p._id} product={p} />
+          ))}
+        </div>
       </div>
     </div>
   );
